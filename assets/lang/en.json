@@ -1,0 +1,16 @@
+{
+  "////////////////// Task List Screen ////////////////////": "",
+  "tasks": "Tasks:",
+  "//////////////////// Add Task Form //////////////////////": "",
+  "taskFormTitle": "Add New Task",
+  "taskFormLabel": "New task",
+  "taskFormSave": "Please enter a task.",
+  "taskFormButton": "Add",
+  "///////////////////// Action Sheet ///////////////////////": "",
+  "actionConfirmYes": "Yes",
+  "actionConfirmNo": "No",
+  "///////////////// Action Sheet Delete ///////////////////": "",
+  "actionDeleteTitle": "Delete task?",
+  "actionDeleteMsg": "This will be permanently.",
+  "actionDeleteSnackbar": "Task deleted."
+}

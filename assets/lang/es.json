@@ -1,0 +1,16 @@
+{
+  "////////////////// Task List Screen ////////////////////": "",
+  "tasks": "Tareas:",
+  "//////////////////// Add Task Form //////////////////////": "",
+  "taskFormTitle": "Añadir Nueva Tarea",
+  "taskFormLabel": "Nueva tarea",
+  "taskFormSave": "Por favor entre una tarea.",
+  "taskFormButton": "Añadir",
+  "///////////////////// Action Sheet ///////////////////////": "",
+  "actionConfirmYes": "Si",
+  "actionConfirmNo": "No",
+  "///////////////// Action Sheet Delete ///////////////////": "",
+  "actionDeleteTitle": "Eliminar tarea?",
+  "actionDeleteMsg": "Esto sera de forma permanente.",
+  "actionDeleteSnackbar": "Tarea eliminada."
+}

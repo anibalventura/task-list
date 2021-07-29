@@ -1,5 +1,4 @@
 import 'package:task_list/ui/themes.dart';
-import 'package:task_list/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 void showSnackbar({
@@ -13,10 +12,10 @@ void showSnackbar({
       duration: const Duration(milliseconds: 2500),
       content: Text(
         msg,
-        style: TextStyle(
-          color: theme(context).cardColor,
-          fontSize: Themes().bodyTextSize3,
-        ),
+        style: theme(context).textTheme.bodyText2!.copyWith(
+              fontSize: Themes().bodyTextSize,
+              color: theme(context).cardColor,
+            ),
       ),
       behavior: behavior ?? SnackBarBehavior.floating,
     ),

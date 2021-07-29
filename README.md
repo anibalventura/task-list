@@ -2,11 +2,11 @@
 [![Flutter](https://img.shields.io/static/v1?label=Flutter&message=2.2&color=blue)](https://flutter.dev/)
 [![Null Safety](https://img.shields.io/static/v1?label=Null+Safety&message=YES&color=success)](https://flutter.dev/docs/null-safety)
 [![Flutter Support](https://img.shields.io/static/v1?label=Support&message=Android%20|%20iOS&color=blue)]()
-[![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
+[![Style: very good analysis](https://img.shields.io/badge/Style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
 
 <img src="assets/repository-banner.png" align="center"/>
 
-Simple task list app as example to consume the [Task List REST API](https://github.com/anibalventura/todo-items-rest-api)
+Task list app as example to consume the [Task List API](https://github.com/anibalventura/task-list-rest-api).
 
 ## Features
 

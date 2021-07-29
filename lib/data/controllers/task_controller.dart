@@ -8,6 +8,10 @@ class TaskController with ChangeNotifier {
   List<Task> _items = [];
   List<Task> get items => [..._items];
 
+  final Map<String, String> _headers = {
+    'content-type': 'application/json; charset=utf-8',
+  };
+
   Future<void> getTasks() async {
     try {
       final response = await http.get(
@@ -22,19 +26,19 @@ class TaskController with ChangeNotifier {
     }
   }
 
-  Future<void> addTask(Task task) async {
+  Future<void> addTask(Task newTask) async {
     try {
       final responseData = await http.post(
         Uri.parse(dotenv.env['API_URL']!),
-        headers: {'content-type': 'application/json; charset=utf-8'},
-        body: json.encode(task.toJson()),
+        headers: _headers,
+        body: json.encode(newTask.toJson()),
       );
 
       final newItem = Task(
         // ignore: avoid_dynamic_calls
         id: json.decode(responseData.body)['id'],
-        name: task.name,
-        isComplete: task.isComplete,
+        name: newTask.name,
+        isComplete: newTask.isComplete,
       );
 
       _items.add(newItem);
@@ -45,13 +49,13 @@ class TaskController with ChangeNotifier {
   }
 
   Future<void> editTask(Task editedTask, Task newTask) async {
-    final itemIndex = _items.indexWhere((item) => item.id == editedTask.id);
+    final taskIndex = _items.indexWhere((item) => item.id == editedTask.id);
 
-    if (itemIndex >= 0) {
+    if (taskIndex >= 0) {
       try {
         await http.put(
           Uri.parse("${dotenv.env['API_URL']!}/${editedTask.id}"),
-          headers: {'content-type': 'application/json; charset=utf-8'},
+          headers: _headers,
           body: json.encode({
             'id': editedTask.id,
             'name': newTask.name,
@@ -59,7 +63,7 @@ class TaskController with ChangeNotifier {
           }),
         );
 
-        _items[itemIndex] = newTask;
+        _items[taskIndex] = newTask;
 
         notifyListeners();
       } catch (e) {
@@ -72,7 +76,7 @@ class TaskController with ChangeNotifier {
     try {
       await http.put(
         Uri.parse("${dotenv.env['API_URL']!}/${task.id}"),
-        headers: {'content-type': 'application/json; charset=utf-8'},
+        headers: _headers,
         body: json.encode({
           'id': task.id,
           'name': task.name,
@@ -80,8 +84,8 @@ class TaskController with ChangeNotifier {
         }),
       );
 
-      final itemIndex = _items.indexWhere((item) => item.id == task.id);
-      _items[itemIndex].isComplete = isComplete;
+      final taskIndex = _items.indexWhere((item) => item.id == task.id);
+      _items[taskIndex].isComplete = isComplete;
 
       notifyListeners();
     } catch (e) {

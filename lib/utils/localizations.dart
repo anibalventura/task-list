@@ -3,6 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/*
+? Handling strings localizations and translations.
+*/
+
 class AppLocalizations {
   AppLocalizations(
     this._locale,
@@ -63,4 +67,37 @@ class _AppLocalizationsDelegate
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
+}
+
+/*
+? Helper function to translate texts on Texts class.
+*/
+String translate(BuildContext context, String text) {
+  return AppLocalizations.of(context)!.trans(text)!;
+}
+
+/*
+? Helper class that access the texts in json format.
+* Find the texts to translate in /assets/lang/.
+*/
+class Texts {
+  static const String appName = 'Task List';
+
+  // Task List Screen.
+  static const String tasks = 'tasks';
+
+  // Add Task Form.
+  static const String taskFormTitleAdd = 'taskFormTitleAdd';
+  static const String taskFormTitleEdit = 'taskFormTitleEdit';
+  static const String taskFormError = 'taskFormError';
+  static const String taskFormButton = 'taskFormButton';
+
+  // Action Sheet.
+  static const String actionConfirmYes = 'actionConfirmYes';
+  static const String actionConfirmNo = 'actionConfirmNo';
+
+  // Action Sheet Delete.
+  static const String actionDeleteTitle = 'actionDeleteTitle';
+  static const String actionDeleteMsg = 'actionDeleteMsg';
+  static const String actionDeleteSnackbar = 'actionDeleteSnackbar';
 }

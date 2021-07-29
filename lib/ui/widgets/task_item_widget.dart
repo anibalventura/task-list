@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:task_list/data/controllers/task_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_list/data/models/task_model.dart';
-import 'package:task_list/ui/widgets/edit_task_form_widget.dart';
+import 'package:task_list/ui/themes.dart';
+import 'package:task_list/ui/widgets/task_form_widget.dart';
+import 'package:task_list/ui/widgets/round_button_widget.dart';
 import 'package:task_list/ui/widgets/snackbar_widget.dart';
-import 'package:task_list/ui/widgets/swipe_task_widget.dart';
-import 'package:task_list/utils/texts.dart';
-import 'package:task_list/utils/utils.dart';
+import 'package:task_list/ui/widgets/swipe_item_widget.dart';
+import 'package:task_list/utils/localizations.dart';
 
 import 'action_bottom_sheet_widget.dart';
 
@@ -32,6 +34,7 @@ class _TaskItemState extends State<TaskItem> {
   @override
   Widget build(BuildContext context) {
     final _todoController = Provider.of<TaskController>(context, listen: false);
+    final _borderRadius = BorderRadius.circular(30.r);
 
     final _item = Task(
       id: widget.id,
@@ -50,7 +53,8 @@ class _TaskItemState extends State<TaskItem> {
                 ? MainAxisAlignment.center
                 : MainAxisAlignment.spaceEvenly,
             children: [
-              TextButton(
+              RoundButton(
+                title: translate(context, Texts.actionConfirmYes),
                 onPressed: () {
                   _todoController.deleteTask(_item.id);
                   showSnackbar(
@@ -59,12 +63,11 @@ class _TaskItemState extends State<TaskItem> {
                   );
                   Navigator.of(context).pop();
                 },
-                child: Text(translate(context, Texts.actionConfirmYes)),
               ),
               if (isLandscape()) SizedBox(width: 0.05.sw),
-              TextButton(
+              RoundButton(
+                title: translate(context, Texts.actionConfirmNo),
                 onPressed: () => Navigator.of(context).pop(),
-                child: Text(translate(context, Texts.actionConfirmNo)),
               ),
             ],
           ),
@@ -72,55 +75,58 @@ class _TaskItemState extends State<TaskItem> {
       );
     }
 
-    return SwipeTask(
+    return SwipeItem(
       taskKey: _item.id,
-      swipeRightColor: Colors.red,
-      swipeRightIcon: const Icon(
-        Icons.delete,
-        color: Colors.white,
-      ),
+      swipeRightColor: theme(context).errorColor,
+      swipeRightIcon: const Icon(FontAwesomeIcons.trashAlt),
       swipeRightAction: _deleteItem,
-      swipeLeftColor: Colors.yellow[900],
-      swipeLeftIcon: const Icon(
-        Icons.edit,
-        color: Colors.white,
-      ),
-      swipeLeftAction: () => showEditTaskForm(context, _item, true),
-      child: Container(
-        margin: EdgeInsets.symmetric(
-          vertical: 0.01.sh,
-        ),
-        padding: EdgeInsets.symmetric(
-          horizontal: 0.02.sh,
-        ),
-        decoration: BoxDecoration(
-          color: Colors.green,
-          borderRadius: BorderRadius.circular(30.r),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              _item.name,
-              style: TextStyle(
-                color: Colors.black,
-                decoration:
-                    _item.isComplete ? TextDecoration.lineThrough : null,
+      swipeLeftColor: theme(context).highlightColor,
+      swipeLeftIcon: const Icon(FontAwesomeIcons.edit),
+      swipeLeftAction: () => showTaskForm(context, _item, true),
+      child: PhysicalModel(
+        color: theme(context).backgroundColor,
+        elevation: 3,
+        shadowColor: theme(context).accentColor,
+        borderRadius: _borderRadius,
+        child: Container(
+          padding: EdgeInsets.only(
+            left: isLandscape() ? 0.025.sw : 0.05.sw,
+            right: 0.01.sh,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: _borderRadius,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Text(
+                  _item.name,
+                  style: theme(context).textTheme.bodyText1!.copyWith(
+                        color: _item.isComplete
+                            ? Colors.grey
+                            : theme(context).textTheme.bodyText1!.color,
+                        fontSize: Themes().bodyTextSize,
+                        decoration: _item.isComplete
+                            ? TextDecoration.lineThrough
+                            : null,
+                      ),
+                ),
               ),
-            ),
-            Transform.scale(
-              scale: 1.r,
-              child: Checkbox(
-                value: _item.isComplete,
-                shape: const CircleBorder(),
-                onChanged: (value) {
-                  _todoController.toggleIsComplete(_item, value!);
-                  setState(() => widget.isComplete = value);
-                },
-                activeColor: Colors.blue,
-              ),
-            )
-          ],
+              Transform.scale(
+                scale: isLandscape() ? 2.r : 1.r,
+                child: Checkbox(
+                  value: _item.isComplete,
+                  shape: const CircleBorder(),
+                  onChanged: (value) {
+                    _todoController.toggleIsComplete(_item, value!);
+                    setState(() => widget.isComplete = value);
+                  },
+                  activeColor: theme(context).accentColor,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -5,11 +5,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:task_list/data/controllers/task_controller.dart';
-import 'package:task_list/services/localizations.dart';
-import 'package:task_list/services/http_overrides.dart';
+import 'package:task_list/utils/localizations.dart';
+import 'package:task_list/utils/http_overrides.dart';
 import 'package:task_list/ui/screens/task_list_screen.dart';
 import 'package:task_list/ui/themes.dart';
-import 'package:task_list/utils/texts.dart';
 
 void main() async {
   // Returns an instance of the WidgetsBinding, creating and initializing.
@@ -48,7 +47,7 @@ class TaskListApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: Texts.appName,
       theme: Themes.lightTheme,
-      darkTheme: Themes.darkTheme,
+      // darkTheme: Themes.darkTheme,
       initialRoute: TaskListScreen.routeName,
       routes: {
         TaskListScreen.routeName: (_) => const TaskListScreen(),

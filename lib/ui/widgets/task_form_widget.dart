@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_list/data/controllers/task_controller.dart';
 import 'package:task_list/data/models/task_model.dart';
+import 'package:task_list/ui/themes.dart';
 import 'package:task_list/ui/widgets/bottom_sheet_widget.dart';
-import 'package:task_list/utils/texts.dart';
-import 'package:task_list/utils/utils.dart';
+import 'package:task_list/ui/widgets/outline_form_field_widget.dart';
+import 'package:task_list/ui/widgets/round_button_widget.dart';
+import 'package:task_list/utils/localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void showEditTaskForm(BuildContext context, [Task? task, bool? edit]) {
+void showTaskForm(BuildContext context, [Task? task, bool? edit]) {
   final formKey = GlobalKey<FormState>();
   final newTask = Task(id: 0, name: '', isComplete: false);
   final todoController = Provider.of<TaskController>(context, listen: false);
 
-  Future<void> saveOrEditTask() async {
+  Future<void> saveTask() async {
     // Validate is form can be saved.
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
@@ -30,31 +32,34 @@ void showEditTaskForm(BuildContext context, [Task? task, bool? edit]) {
   bottomSheet(
     context: context,
     body: [
-      Text(translate(context, Texts.taskFormTitle)),
-      SizedBox(height: 0.01.sh),
+      Text(
+        task != null
+            ? translate(context, Texts.taskFormTitleEdit)
+            : translate(context, Texts.taskFormTitleAdd),
+        style: theme(context).textTheme.headline1!.copyWith(
+              fontSize: Themes().headlineTextSize,
+            ),
+      ),
+      SizedBox(height: isLandscape() ? 0.05.sh : 0.03.sh),
       Form(
         key: formKey,
         child: Column(
           children: [
-            TextFormField(
+            OutlineFormField(
               initialValue: task != null ? task.name : '',
-              decoration: InputDecoration(
-                labelText: translate(context, Texts.taskFormLabel),
-              ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return translate(context, Texts.taskFormSave);
-                }
-              },
+              labelText: task != null
+                  ? translate(context, Texts.taskFormTitleEdit)
+                  : translate(context, Texts.taskFormTitleAdd),
               onSaved: (value) => newTask.name = value.toString(),
-              onFieldSubmitted: (_) => saveOrEditTask,
+              onFieldSubmitted: (_) => saveTask,
             ),
           ],
         ),
       ),
-      TextButton(
-        onPressed: saveOrEditTask,
-        child: Text(translate(context, Texts.taskFormLabel)),
+      SizedBox(height: isLandscape() ? 0.05.sh : 0.02.sh),
+      RoundButton(
+        title: translate(context, Texts.taskFormButton),
+        onPressed: saveTask,
       ),
     ],
   );

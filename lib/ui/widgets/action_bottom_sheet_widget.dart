@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_list/ui/themes.dart';
-import 'package:task_list/utils/utils.dart';
 
 void actionBottomSheet({
   required BuildContext context,
@@ -17,8 +16,8 @@ void actionBottomSheet({
     builder: (BuildContext context) {
       return Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.r),
-          color: theme(context).scaffoldBackgroundColor,
+          borderRadius: BorderRadius.circular(20.r),
+          color: theme(context).backgroundColor,
         ),
         padding: EdgeInsets.symmetric(
           horizontal: 0.03.sw,
@@ -30,15 +29,15 @@ void actionBottomSheet({
           children: [
             Text(
               title!,
-              style: theme(context).textTheme.bodyText1!.copyWith(
-                    fontSize: Themes().bodyTextSize1,
+              style: theme(context).textTheme.headline1!.copyWith(
+                    fontSize: Themes().headlineTextSize,
                   ),
             ),
             SizedBox(height: isLandscape() ? 0.01.sh : 0.005.sh),
             Text(
               message!,
-              style: theme(context).textTheme.headline1!.copyWith(
-                    fontSize: Themes().bodyTextSize1,
+              style: theme(context).textTheme.bodyText1!.copyWith(
+                    fontSize: Themes().bodyTextSize,
                   ),
             ),
             SizedBox(height: isLandscape() ? 0.05.sh : 0.02.sh),

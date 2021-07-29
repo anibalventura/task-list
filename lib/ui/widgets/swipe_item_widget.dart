@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SwipeTask extends StatelessWidget {
-  const SwipeTask({
+class SwipeItem extends StatelessWidget {
+  const SwipeItem({
     Key? key,
     required this.taskKey,
     required this.child,
@@ -26,13 +26,8 @@ class SwipeTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _borderRadius = BorderRadius.circular(30.r);
-    final _margin = EdgeInsets.symmetric(
-      horizontal: 0.02.sw,
-      vertical: 0.01.sh,
-    );
     final _padding = EdgeInsets.symmetric(
-      horizontal: 0.02.sw,
-      vertical: 0.01.sh,
+      horizontal: 0.04.sw,
     );
 
     return Dismissible(
@@ -43,7 +38,6 @@ class SwipeTask extends StatelessWidget {
           borderRadius: _borderRadius,
         ),
         alignment: Alignment.centerLeft,
-        margin: _margin,
         padding: _padding,
         child: swipeRightIcon,
       ),
@@ -53,7 +47,6 @@ class SwipeTask extends StatelessWidget {
           borderRadius: _borderRadius,
         ),
         alignment: Alignment.centerRight,
-        margin: _margin,
         padding: _padding,
         child: swipeLeftIcon,
       ),

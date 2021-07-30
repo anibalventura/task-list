@@ -83,8 +83,21 @@ String translate(BuildContext context, String text) {
 class Texts {
   static const String appName = 'Task List';
 
-  // Task List Screen.
+  // Intro Screen.
   static const String tasks = 'tasks';
+  static const String loading = 'loading';
+
+  // Task List Screen.
+  static const String introSkip = 'introSkip';
+  static const String introDone = 'introDone';
+  static const String introWelcomeTitle = 'introWelcomeTitle';
+  static const String introWelcomeMsg = 'introWelcomeMsg';
+  static const String introEditTitle = 'introEditTitle';
+  static const String introEditMsg = 'introEditMsg';
+  static const String introDeleteTitle = 'introDeleteTitle';
+  static const String introDeleteMsg = 'introDeleteMsg';
+  static const String introPullRefreshTitle = 'introPullRefreshTitle';
+  static const String introPullRefreshMsg = 'introPullRefreshMsg';
 
   // Add Task Form.
   static const String taskFormTitleAdd = 'taskFormTitleAdd';

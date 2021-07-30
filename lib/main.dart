@@ -4,7 +4,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:task_list/data/cache/shared_pref.dart';
 import 'package:task_list/data/controllers/task_controller.dart';
+import 'package:task_list/ui/screens/intro_screen.dart';
 import 'package:task_list/utils/localizations.dart';
 import 'package:task_list/utils/http_overrides.dart';
 import 'package:task_list/ui/screens/task_list_screen.dart';
@@ -41,36 +43,51 @@ class TaskListApp extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  Future<String> _showIntro() async {
+    // TODO: Correct key after finish intro UI.
+    if (await SharedPref().getBool('intr')) {
+      return TaskListScreen.routeName;
+    } else {
+      return IntroScreen.routeName;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: Texts.appName,
-      theme: Themes.lightTheme,
-      // darkTheme: Themes.darkTheme,
-      initialRoute: TaskListScreen.routeName,
-      routes: {
-        TaskListScreen.routeName: (_) => const TaskListScreen(),
-      },
-      supportedLocales: const [
-        Locale('en', ''),
-        Locale('es', ''),
-      ],
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      localeResolutionCallback:
-          (Locale? locale, Iterable<Locale> supportedLocales) {
-        for (final supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale!.languageCode ||
-              supportedLocale.countryCode == locale.countryCode) {
-            return supportedLocale;
-          }
-        }
-        return supportedLocales.first;
+    return FutureBuilder(
+      future: _showIntro(),
+      builder: (context, snapshot) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: Texts.appName,
+          theme: Themes.lightTheme,
+          darkTheme: Themes.darkTheme,
+          initialRoute: snapshot.data.toString(),
+          routes: {
+            IntroScreen.routeName: (_) => const IntroScreen(),
+            TaskListScreen.routeName: (_) => const TaskListScreen(),
+          },
+          supportedLocales: const [
+            Locale('en', ''),
+            Locale('es', ''),
+          ],
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          localeResolutionCallback:
+              (Locale? locale, Iterable<Locale> supportedLocales) {
+            for (final supportedLocale in supportedLocales) {
+              if (supportedLocale.languageCode == locale!.languageCode ||
+                  supportedLocale.countryCode == locale.countryCode) {
+                return supportedLocale;
+              }
+            }
+            return supportedLocales.first;
+          },
+        );
       },
     );
   }

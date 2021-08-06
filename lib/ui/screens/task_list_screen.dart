@@ -166,7 +166,7 @@ class TaskListScreen extends StatelessWidget {
                 padding: EdgeInsets.only(
                   top: isLandscape() ? 0.05.sh : 0.02.sh,
                   right: isLandscape() ? 0.03.sw : 0.1.sw,
-                  bottom: isLandscape() ? 0.1.sh : 0.015.sh,
+                  bottom: isLandscape() ? 0.05.sh : 0.015.sh,
                 ),
                 child: Consumer<TaskController>(
                   builder: (context, task, child) {

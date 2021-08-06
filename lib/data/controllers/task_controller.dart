@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:task_list/data/models/task_model.dart';
 import 'package:http/http.dart' as http;
@@ -15,10 +16,11 @@ class TaskController with ChangeNotifier {
   Future<void> getTasks() async {
     try {
       final response = await http.get(
-        Uri.parse(dotenv.env['API_URL']!),
+        Uri.parse(Platform.isAndroid
+            ? dotenv.env['AVD_API_URL']!
+            : dotenv.env['API_URL']!),
       );
       final responseData = json.decode(response.body) as List;
-
       _items = responseData.map((json) => Task.fromJson(json)).toList();
       notifyListeners();
     } catch (e) {
@@ -29,7 +31,9 @@ class TaskController with ChangeNotifier {
   Future<void> addTask(Task newTask) async {
     try {
       final responseData = await http.post(
-        Uri.parse(dotenv.env['API_URL']!),
+        Uri.parse(Platform.isAndroid
+            ? dotenv.env['AVD_API_URL']!
+            : dotenv.env['API_URL']!),
         headers: _headers,
         body: json.encode(newTask.toJson()),
       );
@@ -54,7 +58,9 @@ class TaskController with ChangeNotifier {
     if (taskIndex >= 0) {
       try {
         await http.put(
-          Uri.parse("${dotenv.env['API_URL']!}/${editedTask.id}"),
+          Uri.parse(Platform.isAndroid
+              ? "${dotenv.env['AVD_API_URL']!}/${editedTask.id}"
+              : "${dotenv.env['API_URL']!}/${editedTask.id}"),
           headers: _headers,
           body: json.encode({
             'id': editedTask.id,
@@ -75,7 +81,9 @@ class TaskController with ChangeNotifier {
   Future<void> toggleIsComplete(Task task, bool isComplete) async {
     try {
       await http.put(
-        Uri.parse("${dotenv.env['API_URL']!}/${task.id}"),
+        Uri.parse(Platform.isAndroid
+            ? "${dotenv.env['AVD_API_URL']!}/${task.id}"
+            : "${dotenv.env['API_URL']!}/${task.id}"),
         headers: _headers,
         body: json.encode({
           'id': task.id,
@@ -100,8 +108,11 @@ class TaskController with ChangeNotifier {
     _items.removeAt(existingItemIndex);
     notifyListeners();
 
-    final response =
-        await http.delete(Uri.parse("${dotenv.env['API_URL']!}/$id"));
+    final response = await http.delete(
+      Uri.parse(Platform.isAndroid
+          ? "${dotenv.env['AVD_API_URL']!}/$id"
+          : "${dotenv.env['API_URL']!}/$id"),
+    );
 
     if (response.statusCode >= 400) {
       _items.insert(existingItemIndex, existingItem);

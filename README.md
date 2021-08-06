@@ -11,14 +11,23 @@ Task list app as an example to consume the [Task List API](https://github.com/an
 
 ## Features
 
-- Splash and one time intro screen.
-- Add, edit, delete task locally and from API.
+- Splash screen and one time intro screen.
+- Add, edit, delete tasks locally and from API.
 - Swipe left to edit and right to delete.
 - Pull to refresh from API.
 - Dark mode support.
 - Languages: English and Spanish.
 
 ## Build
+
+1. Run the [Task List API](https://github.com/anibalventura/task-list-rest-api).
+2. Change the PORT number on `/assets/.env` file.
+```
+API_URL=https://localhost:PORT_NUMBER/api/Task
+
+// Used for Android Emulator
+AVD_API_URL=https://10.0.2.2:PORT_NUMBER/api/Task
+```
 
 ## Dependencies
 

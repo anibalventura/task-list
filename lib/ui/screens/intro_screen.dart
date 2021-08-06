@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:task_list/data/cache/shared_pref.dart';
@@ -100,8 +101,9 @@ class _IntroScreenState extends State<IntroScreen> {
         PageViewModel(
           title: translate(context, Texts.introWelcomeTitle),
           body: translate(context, Texts.introWelcomeMsg),
-          image: Image(
-            image: const AssetImage('assets/images/launcher/icon.png'),
+          image: SvgPicture.asset(
+            'assets/images/launcher/app_icon.svg',
+            semanticsLabel: 'Task List App Icon',
             height: 0.3.sh,
           ),
           decoration: pageDecoration,

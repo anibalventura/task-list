@@ -2,10 +2,10 @@
 
 [![Flutter](https://img.shields.io/static/v1?label=Flutter&message=2.2&color=blue)](https://flutter.dev/)
 [![Null Safety](https://img.shields.io/static/v1?label=Null+Safety&message=YES&color=success)](https://flutter.dev/docs/null-safety)
-[![Flutter Support](https://img.shields.io/static/v1?label=Support&message=Android%20|%20iOS&color=blue)]()
+[![Flutter Support](https://img.shields.io/static/v1?label=Support&message=Android%20|%20iOS|%20Web&color=blue)]()
 [![Style: very good analysis](https://img.shields.io/badge/Style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
 
-<img src="assets/images/repository-banner.png" align="center"/>
+<img src="assets/images/repository_banner.png" align="center"/>
 
 Task list app as an example to consume the [Task List API](https://github.com/anibalventura/task-list-rest-api).
 
@@ -24,6 +24,7 @@ Task list app as an example to consume the [Task List API](https://github.com/an
 
 - [flutter_dotenv](https://pub.dev/packages/flutter_dotenv)
 - [flutter_screenutil](https://pub.dev/packages/flutter_screenutil)
+- [flutter_svg](https://pub.dev/packages/flutter_svg)
 - [font_awesome_flutter](https://pub.dev/packages/font_awesome_flutter)
 - [google_fonts](https://pub.dev/packages/google_fonts)
 - [http](https://pub.dev/packages/http)

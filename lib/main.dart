@@ -44,8 +44,7 @@ class TaskListApp extends StatelessWidget {
   }) : super(key: key);
 
   Future<String> _showIntro() async {
-    // TODO: Correct key after finish intro UI.
-    if (await SharedPref().getBool('intr')) {
+    if (await SharedPref().getBool('intro')) {
       return TaskListScreen.routeName;
     } else {
       return IntroScreen.routeName;

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:task_list/data/controllers/task_controller.dart';
 import 'package:task_list/ui/themes.dart';
+import 'package:task_list/ui/widgets/placeholder_image.dart';
 import 'package:task_list/ui/widgets/task_form_widget.dart';
 import 'package:task_list/ui/widgets/task_item_widget.dart';
 import 'package:task_list/utils/localizations.dart';
@@ -26,23 +28,29 @@ class TaskListScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: theme(context).backgroundColor,
-      appBar: AppBar(
-        title: Text(
-          Texts.appName,
-          style: theme(context).textTheme.headline1!.copyWith(
-              fontSize: Themes().headlineTextSize,
-              color: theme(context).textTheme.bodyText2!.color),
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(15.r),
+      body: NestedScrollView(
+        floatHeaderSlivers: true,
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverAppBar(
+            floating: true,
+            title: Text(
+              Texts.appName,
+              style: theme(context).textTheme.headline1!.copyWith(
+                  fontSize: Themes().headlineTextSize,
+                  color: theme(context).textTheme.bodyText2!.color),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(15.r),
+              ),
+            ),
           ),
-        ),
-      ),
-      body: SafeArea(
-        child: FutureBuilder(
+        ],
+        body: FutureBuilder(
           future: todoController.getTasks(),
           builder: (context, dataSnapshot) {
+            const imageAssets = 'assets/images/task_list_screen';
+
             if (dataSnapshot.connectionState == ConnectionState.waiting) {
               return Center(
                 child: SizedBox(
@@ -66,14 +74,39 @@ class TaskListScreen extends StatelessWidget {
                   ),
                 ),
               );
+            } else if (dataSnapshot.error != null) {
+              return SmartRefresher(
+                controller: refreshController,
+                onRefresh: refresh,
+                child: PlaceholderImage(
+                  image: SvgPicture.asset(
+                    '$imageAssets/error_icon.svg',
+                    semanticsLabel:
+                        translate(context, Texts.placeholderErrorIcon),
+                    height: 0.2.sh,
+                  ),
+                  message: translate(context, Texts.placeholderErrorMsg),
+                ),
+              );
             } else {
-              if (dataSnapshot.error != null) {
-                return const Center(
-                  child: Text('An error ocurred!'),
-                );
-              } else {
-                return Consumer<TaskController>(
-                  builder: (context, todo, child) {
+              return Consumer<TaskController>(
+                builder: (context, todo, child) {
+                  if (todo.items.isEmpty) {
+                    return SmartRefresher(
+                      controller: refreshController,
+                      onRefresh: refresh,
+                      child: PlaceholderImage(
+                        image: SvgPicture.asset(
+                          '$imageAssets/check_icon.svg',
+                          semanticsLabel:
+                              translate(context, Texts.placeholderAllDoneIcon),
+                          height: 0.15.sh,
+                        ),
+                        message:
+                            translate(context, Texts.placeholderAllDoneMsg),
+                      ),
+                    );
+                  } else {
                     return SmartRefresher(
                       controller: refreshController,
                       onRefresh: refresh,
@@ -103,9 +136,9 @@ class TaskListScreen extends StatelessWidget {
                         },
                       ),
                     );
-                  },
-                );
-              }
+                  }
+                },
+              );
             }
           },
         ),
@@ -133,6 +166,7 @@ class TaskListScreen extends StatelessWidget {
                 padding: EdgeInsets.only(
                   top: isLandscape() ? 0.05.sh : 0.02.sh,
                   right: isLandscape() ? 0.03.sw : 0.1.sw,
+                  bottom: isLandscape() ? 0.1.sh : 0.015.sh,
                 ),
                 child: Consumer<TaskController>(
                   builder: (context, task, child) {

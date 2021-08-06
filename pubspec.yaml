@@ -1,5 +1,5 @@
 name: task_list
-description: Simple To-do List App.
+description: Simple Task List App.
 publish_to: "none"
 version: 1.0.0+1
 
@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   flutter_dotenv: ^5.0.0
   flutter_screenutil: ^5.0.0+2
+  flutter_svg: ^0.22.0
   font_awesome_flutter: ^9.1.0
   google_fonts: ^2.1.0
   http: ^0.13.3
@@ -40,25 +41,25 @@ flutter:
   assets:
     - assets/.env
     - assets/lang/
+    - assets/images/launcher/app_icon.svg
     - assets/images/intro_screen/
-    - assets/images/launcher/icon.png
+    - assets/images/task_list_screen/
 
+# Change app package name run:
+## flutter pub run change_app_package_name:main com.new.package.name
 # To change icon and splash run:
 ## flutter clean && flutter pub get
 ## flutter pub run flutter_native_splash:create && flutter pub run flutter_launcher_icons:main
 flutter_icons:
-  ios: true
   android: true
-  image_path_ios: "assets/images/launcher/icon.png"
-  image_path_android: "assets/images/launcher/icon.png"
-  adaptive_icon_background: "assets/images/launcher/background.png"
-  adaptive_icon_foreground: "assets/images/launcher/foreground.png"
+  image_path_android: "assets/images/launcher/icon_android.png"
+  ios: true
+  image_path_ios: "assets/images/launcher/icon_iphone.png"
+  remove_alpha_ios: true
 
 flutter_native_splash:
   color: "#FFFFFF"
-  image: assets/images/launcher/splash.png
+  image: assets/images/launcher/icon_splash.png
   color_dark: "#22252D"
-  image_dark: assets/images/launcher/splash.png
+  image_dark: assets/images/launcher/icon_splash.png
   android_disable_fullscreen: true
-# Change app package name run:
-## flutter pub run change_app_package_name:main com.new.package.name

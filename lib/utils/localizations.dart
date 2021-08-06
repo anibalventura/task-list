@@ -84,10 +84,6 @@ class Texts {
   static const String appName = 'Task List';
 
   // Intro Screen.
-  static const String tasks = 'tasks';
-  static const String loading = 'loading';
-
-  // Task List Screen.
   static const String introSkip = 'introSkip';
   static const String introDone = 'introDone';
   static const String introWelcomeTitle = 'introWelcomeTitle';
@@ -98,6 +94,14 @@ class Texts {
   static const String introDeleteMsg = 'introDeleteMsg';
   static const String introPullRefreshTitle = 'introPullRefreshTitle';
   static const String introPullRefreshMsg = 'introPullRefreshMsg';
+
+  // Task List Screen.
+  static const String tasks = 'tasks';
+  static const String loading = 'loading';
+  static const String placeholderErrorIcon = 'placeholderErrorIcon';
+  static const String placeholderErrorMsg = 'placeholderErrorMsg';
+  static const String placeholderAllDoneIcon = 'placeholderAllDoneIcon';
+  static const String placeholderAllDoneMsg = 'placeholderAllDoneMsg';
 
   // Add Task Form.
   static const String taskFormTitleAdd = 'taskFormTitleAdd';

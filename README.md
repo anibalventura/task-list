@@ -1,9 +1,10 @@
 # Task List
 
-[![Flutter](https://img.shields.io/static/v1?label=Flutter&message=2.2&color=blue)](https://flutter.dev/)
+[![Flutter](https://img.shields.io/static/v1?label=Flutter&message=2.10.1&color=blue)](https://flutter.dev/)
 [![Null Safety](https://img.shields.io/static/v1?label=Null+Safety&message=YES&color=success)](https://flutter.dev/docs/null-safety)
 [![Flutter Support](https://img.shields.io/static/v1?label=Support&message=Android%20|%20iOS|%20Web&color=blue)]()
 [![Style: very good analysis](https://img.shields.io/badge/Style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
+[![License](https://img.shields.io/static/v1?label=License&message=MIT&color=blue)](LICENSE.md)
 
 <img src="assets/images/repository_banner.png" align="center"/>
 
@@ -55,5 +56,5 @@ AVD_API_URL=https://10.0.2.2:PORT_NUMBER/api/Task
 ```xml
 MIT License
 
-Copyright (c) 2021 Anibal Ventura
+Copyright (c) 2022 Anibal Ventura
 ```

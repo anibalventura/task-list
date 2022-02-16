@@ -60,8 +60,11 @@ class SwipeItem extends StatelessWidget {
             // ignore: avoid_dynamic_calls
             swipeLeftAction?.call();
             break;
+          // ignore: no_default_cases
           default:
+            return false;
         }
+        return null;
       },
       child: child,
     );

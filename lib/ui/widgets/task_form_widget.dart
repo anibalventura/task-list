@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:task_list/data/controllers/task_controller.dart';
 import 'package:task_list/data/models/task_model.dart';
@@ -7,8 +8,8 @@ import 'package:task_list/ui/widgets/bottom_sheet_widget.dart';
 import 'package:task_list/ui/widgets/outline_form_field_widget.dart';
 import 'package:task_list/ui/widgets/round_button_widget.dart';
 import 'package:task_list/utils/localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+// ignore: avoid_positional_boolean_parameters
 void showTaskForm(BuildContext context, [Task? task, bool? edit]) {
   final formKey = GlobalKey<FormState>();
   final newTask = Task(id: 0, name: '', isComplete: false);
@@ -25,6 +26,7 @@ void showTaskForm(BuildContext context, [Task? task, bool? edit]) {
         await todoController.editTask(task!, newTask);
       }
 
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
     }
   }
@@ -50,8 +52,9 @@ void showTaskForm(BuildContext context, [Task? task, bool? edit]) {
               labelText: task != null
                   ? translate(context, Texts.taskFormTitleEdit)
                   : translate(context, Texts.taskFormTitleAdd),
+              // ignore: noop_primitive_operations
               onSaved: (value) => newTask.name = value.toString(),
-              onFieldSubmitted: (_) => saveTask,
+              onFieldSubmitted: () => saveTask,
             ),
           ],
         ),

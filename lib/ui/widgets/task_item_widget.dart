@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:task_list/data/controllers/task_controller.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_list/data/models/task_model.dart';
 import 'package:task_list/ui/themes.dart';
-import 'package:task_list/ui/widgets/task_form_widget.dart';
+import 'package:task_list/ui/widgets/action_bottom_sheet_widget.dart';
 import 'package:task_list/ui/widgets/round_button_widget.dart';
 import 'package:task_list/ui/widgets/snackbar_widget.dart';
 import 'package:task_list/ui/widgets/swipe_item_widget.dart';
+import 'package:task_list/ui/widgets/task_form_widget.dart';
 import 'package:task_list/utils/localizations.dart';
 
-import 'action_bottom_sheet_widget.dart';
 
 // ignore: must_be_immutable
 class TaskItem extends StatefulWidget {
@@ -27,10 +27,10 @@ class TaskItem extends StatefulWidget {
   bool isComplete;
 
   @override
-  _TaskItemState createState() => _TaskItemState();
+  TaskItemState createState() => TaskItemState();
 }
 
-class _TaskItemState extends State<TaskItem> {
+class TaskItemState extends State<TaskItem> {
   @override
   Widget build(BuildContext context) {
     final _todoController = Provider.of<TaskController>(context, listen: false);
@@ -86,7 +86,7 @@ class _TaskItemState extends State<TaskItem> {
       child: PhysicalModel(
         color: theme(context).backgroundColor,
         elevation: 3,
-        shadowColor: theme(context).accentColor,
+        shadowColor: theme(context).colorScheme.secondary,
         borderRadius: _borderRadius,
         child: Container(
           padding: EdgeInsets.only(
@@ -122,7 +122,7 @@ class _TaskItemState extends State<TaskItem> {
                     _todoController.toggleIsComplete(_item, value!);
                     setState(() => widget.isComplete = value);
                   },
-                  activeColor: theme(context).accentColor,
+                  activeColor: theme(context).colorScheme.secondary,
                 ),
               )
             ],

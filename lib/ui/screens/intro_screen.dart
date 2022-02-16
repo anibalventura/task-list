@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:task_list/data/cache/shared_pref.dart';
 import 'package:task_list/ui/screens/task_list_screen.dart';
 import 'package:task_list/ui/themes.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_list/utils/localizations.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -14,15 +14,15 @@ class IntroScreen extends StatefulWidget {
   static const routeName = '/intro-screen';
 
   @override
-  _IntroScreenState createState() => _IntroScreenState();
+  IntroScreenState createState() => IntroScreenState();
 }
 
-class _IntroScreenState extends State<IntroScreen> {
+class IntroScreenState extends State<IntroScreen> {
   late String _brightness;
   final String imageAssets = 'assets/images/intro_screen/';
 
   void _checkBrightness() {
-    var platformBrightness =
+    final platformBrightness =
         SchedulerBinding.instance!.window.platformBrightness;
     if (platformBrightness == Brightness.dark) {
       _brightness = 'night';
@@ -82,7 +82,7 @@ class _IntroScreenState extends State<IntroScreen> {
       ),
       dotsDecorator: DotsDecorator(
         color: Colors.black26,
-        activeColor: theme(context).accentColor,
+        activeColor: theme(context).colorScheme.secondary,
         size: Size.square(
           isLandscape() ? 20.r : 10.r,
         ),

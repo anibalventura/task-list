@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
@@ -10,7 +11,6 @@ import 'package:task_list/ui/widgets/placeholder_image.dart';
 import 'package:task_list/ui/widgets/task_form_widget.dart';
 import 'package:task_list/ui/widgets/task_item_widget.dart';
 import 'package:task_list/utils/localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TaskListScreen extends StatelessWidget {
   const TaskListScreen({Key? key}) : super(key: key);
@@ -19,8 +19,9 @@ class TaskListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todoController = Provider.of<TaskController>(context, listen: false);
-    final refreshController = RefreshController(initialRefresh: false);
+    final refreshController = RefreshController();
 
+    // ignore: avoid_void_async
     void refresh() async {
       await todoController.getTasks();
       refreshController.refreshCompleted();
@@ -36,8 +37,9 @@ class TaskListScreen extends StatelessWidget {
             title: Text(
               Texts.appName,
               style: theme(context).textTheme.headline1!.copyWith(
-                  fontSize: Themes().headlineTextSize,
-                  color: theme(context).textTheme.bodyText2!.color),
+                    fontSize: Themes().headlineTextSize,
+                    color: theme(context).textTheme.bodyText2!.color,
+                  ),
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
@@ -57,14 +59,13 @@ class TaskListScreen extends StatelessWidget {
                   height: isLandscape() ? 0.09.sh : 0.04.sh,
                   width: isLandscape() ? 0.3.sw : 0.4.sw,
                   child: LiquidLinearProgressIndicator(
-                    value: 0.5,
-                    valueColor:
-                        AlwaysStoppedAnimation(theme(context).accentColor),
+                    valueColor: AlwaysStoppedAnimation(
+                      theme(context).colorScheme.secondary,
+                    ),
                     backgroundColor: Colors.transparent,
-                    borderColor: theme(context).accentColor,
+                    borderColor: theme(context).colorScheme.secondary,
                     borderWidth: 1.r,
                     borderRadius: 30.r,
-                    direction: Axis.horizontal,
                     center: Text(
                       translate(context, Texts.loading),
                       style: theme(context).textTheme.bodyText2!.copyWith(
@@ -145,7 +146,7 @@ class TaskListScreen extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: theme(context).accentColor,
+        backgroundColor: theme(context).colorScheme.secondary,
         foregroundColor: theme(context).iconTheme.color,
         onPressed: () => showTaskForm(context),
         child: const Icon(FontAwesomeIcons.plus),
@@ -159,7 +160,6 @@ class TaskListScreen extends StatelessWidget {
           notchMargin: isLandscape() ? 10.r : 5.r,
           color: theme(context).primaryColor,
           child: Row(
-            mainAxisSize: MainAxisSize.max,
             children: [
               const Expanded(child: SizedBox()),
               Container(

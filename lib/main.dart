@@ -7,11 +7,12 @@ import 'package:provider/provider.dart';
 import 'package:task_list/data/cache/shared_pref.dart';
 import 'package:task_list/data/controllers/task_controller.dart';
 import 'package:task_list/ui/screens/intro_screen.dart';
-import 'package:task_list/utils/localizations.dart';
-import 'package:task_list/utils/http_overrides.dart';
 import 'package:task_list/ui/screens/task_list_screen.dart';
 import 'package:task_list/ui/themes.dart';
+import 'package:task_list/utils/http_overrides.dart';
+import 'package:task_list/utils/localizations.dart';
 
+// ignore: avoid_void_async
 void main() async {
   // Returns an instance of the WidgetsBinding, creating and initializing.
   WidgetsFlutterBinding.ensureInitialized();

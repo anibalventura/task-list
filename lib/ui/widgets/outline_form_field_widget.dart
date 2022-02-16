@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_list/ui/themes.dart';
 import 'package:task_list/utils/localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OutlineFormField extends StatelessWidget {
   const OutlineFormField({
@@ -44,7 +44,7 @@ class OutlineFormField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: _borderRadius,
           borderSide: BorderSide(
-            color: theme(context).accentColor,
+            color: theme(context).colorScheme.secondary,
           ),
         ),
         errorBorder: OutlineInputBorder(
@@ -58,6 +58,7 @@ class OutlineFormField extends StatelessWidget {
         if (value!.isEmpty) {
           return translate(context, Texts.taskFormError);
         }
+        return null;
       },
       onSaved: (value) => onSaved(value!),
       onFieldSubmitted: (_) => onFieldSubmitted,

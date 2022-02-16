@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_list/ui/themes.dart';
@@ -25,7 +24,7 @@ class RoundButton extends StatelessWidget {
       onPressed: onPressed as VoidCallback,
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(
-          buttonColor ?? theme(context).accentColor,
+          buttonColor ?? theme(context).colorScheme.secondary,
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(

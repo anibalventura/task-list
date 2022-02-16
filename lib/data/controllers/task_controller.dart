@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:task_list/data/models/task_model.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
+import 'package:task_list/data/models/task_model.dart';
 
 class TaskController with ChangeNotifier {
   List<Task> _items = [];
@@ -16,12 +16,18 @@ class TaskController with ChangeNotifier {
   Future<void> getTasks() async {
     try {
       final response = await http.get(
-        Uri.parse(Platform.isAndroid
-            ? dotenv.env['AVD_API_URL']!
-            : dotenv.env['API_URL']!),
+        Uri.parse(
+          Platform.isAndroid
+              ? dotenv.env['AVD_API_URL']!
+              : dotenv.env['API_URL']!,
+        ),
       );
       final responseData = json.decode(response.body) as List;
-      _items = responseData.map((json) => Task.fromJson(json)).toList();
+      _items = responseData
+          .map(
+            (dynamic json) => Task.fromJson(json as Map<String, dynamic>),
+          )
+          .toList();
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -31,16 +37,18 @@ class TaskController with ChangeNotifier {
   Future<void> addTask(Task newTask) async {
     try {
       final responseData = await http.post(
-        Uri.parse(Platform.isAndroid
-            ? dotenv.env['AVD_API_URL']!
-            : dotenv.env['API_URL']!),
+        Uri.parse(
+          Platform.isAndroid
+              ? dotenv.env['AVD_API_URL']!
+              : dotenv.env['API_URL']!,
+        ),
         headers: _headers,
         body: json.encode(newTask.toJson()),
       );
 
       final newItem = Task(
         // ignore: avoid_dynamic_calls
-        id: json.decode(responseData.body)['id'],
+        id: json.decode(responseData.body)['id'] as int,
         name: newTask.name,
         isComplete: newTask.isComplete,
       );
@@ -58,9 +66,11 @@ class TaskController with ChangeNotifier {
     if (taskIndex >= 0) {
       try {
         await http.put(
-          Uri.parse(Platform.isAndroid
-              ? "${dotenv.env['AVD_API_URL']!}/${editedTask.id}"
-              : "${dotenv.env['API_URL']!}/${editedTask.id}"),
+          Uri.parse(
+            Platform.isAndroid
+                ? "${dotenv.env['AVD_API_URL']!}/${editedTask.id}"
+                : "${dotenv.env['API_URL']!}/${editedTask.id}",
+          ),
           headers: _headers,
           body: json.encode({
             'id': editedTask.id,
@@ -78,12 +88,15 @@ class TaskController with ChangeNotifier {
     }
   }
 
+  // ignore: avoid_positional_boolean_parameters
   Future<void> toggleIsComplete(Task task, bool isComplete) async {
     try {
       await http.put(
-        Uri.parse(Platform.isAndroid
-            ? "${dotenv.env['AVD_API_URL']!}/${task.id}"
-            : "${dotenv.env['API_URL']!}/${task.id}"),
+        Uri.parse(
+          Platform.isAndroid
+              ? "${dotenv.env['AVD_API_URL']!}/${task.id}"
+              : "${dotenv.env['API_URL']!}/${task.id}",
+        ),
         headers: _headers,
         body: json.encode({
           'id': task.id,
@@ -109,9 +122,11 @@ class TaskController with ChangeNotifier {
     notifyListeners();
 
     final response = await http.delete(
-      Uri.parse(Platform.isAndroid
-          ? "${dotenv.env['AVD_API_URL']!}/$id"
-          : "${dotenv.env['API_URL']!}/$id"),
+      Uri.parse(
+        Platform.isAndroid
+            ? "${dotenv.env['AVD_API_URL']!}/$id"
+            : "${dotenv.env['API_URL']!}/$id",
+      ),
     );
 
     if (response.statusCode >= 400) {

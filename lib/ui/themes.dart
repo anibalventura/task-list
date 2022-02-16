@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData theme(BuildContext context) => Theme.of(context);
 bool isLandscape() => ScreenUtil().orientation == Orientation.landscape;
@@ -67,7 +66,9 @@ class Themes {
   // Light.
   static ThemeData lightTheme = ThemeData(
     primaryColor: _lightPrimaryColor,
-    accentColor: _lightAccentColor,
+    colorScheme: const ColorScheme.light(
+      secondary: _lightAccentColor,
+    ),
     backgroundColor: _lightBackgroundColor,
     errorColor: _lightDeleteColor,
     highlightColor: _lightEditColor,
@@ -94,7 +95,9 @@ class Themes {
   // Dark.
   static ThemeData darkTheme = ThemeData.dark().copyWith(
     primaryColor: _darkPrimaryColor,
-    accentColor: _darkAccentColor,
+    colorScheme: const ColorScheme.dark(
+      secondary: _darkAccentColor,
+    ),
     backgroundColor: _darkBackgroundColor,
     errorColor: _darkDeleteColor,
     highlightColor: _darkEditColor,

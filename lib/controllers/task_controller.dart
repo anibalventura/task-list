@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:task_list/data/models/task_model.dart';
+import 'package:task_list/models/task_model.dart';
 
 class TaskController with ChangeNotifier {
   List<Task> _items = [];

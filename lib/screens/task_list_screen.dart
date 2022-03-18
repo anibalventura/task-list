@@ -5,12 +5,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:task_list/data/controllers/task_controller.dart';
-import 'package:task_list/ui/themes.dart';
-import 'package:task_list/ui/widgets/placeholder_image.dart';
-import 'package:task_list/ui/widgets/task_form_widget.dart';
-import 'package:task_list/ui/widgets/task_item_widget.dart';
+import 'package:task_list/controllers/task_controller.dart';
+import 'package:task_list/screens/widgets/placeholder_image.dart';
+import 'package:task_list/screens/widgets/task_form_widget.dart';
+import 'package:task_list/screens/widgets/task_item_widget.dart';
 import 'package:task_list/utils/localizations.dart';
+import 'package:task_list/utils/themes.dart';
 
 class TaskListScreen extends StatelessWidget {
   const TaskListScreen({Key? key}) : super(key: key);
@@ -28,11 +28,11 @@ class TaskListScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: theme(context).backgroundColor,
       body: NestedScrollView(
         floatHeaderSlivers: true,
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
+            backgroundColor: theme(context).primaryColor,
             floating: true,
             title: Text(
               Texts.appName,

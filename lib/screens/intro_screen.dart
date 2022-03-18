@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:task_list/data/cache/shared_pref.dart';
-import 'package:task_list/ui/screens/task_list_screen.dart';
-import 'package:task_list/ui/themes.dart';
+import 'package:task_list/cache/shared_pref.dart';
+import 'package:task_list/screens/task_list_screen.dart';
 import 'package:task_list/utils/localizations.dart';
+import 'package:task_list/utils/themes.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({Key? key}) : super(key: key);

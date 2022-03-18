@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:task_list/data/controllers/task_controller.dart';
-import 'package:task_list/data/models/task_model.dart';
-import 'package:task_list/ui/themes.dart';
-import 'package:task_list/ui/widgets/bottom_sheet_widget.dart';
-import 'package:task_list/ui/widgets/outline_form_field_widget.dart';
-import 'package:task_list/ui/widgets/round_button_widget.dart';
+import 'package:task_list/controllers/task_controller.dart';
+import 'package:task_list/models/task_model.dart';
+import 'package:task_list/screens/widgets/bottom_sheet_widget.dart';
+import 'package:task_list/screens/widgets/outline_form_field_widget.dart';
+import 'package:task_list/screens/widgets/round_button_widget.dart';
 import 'package:task_list/utils/localizations.dart';
+import 'package:task_list/utils/themes.dart';
 
 // ignore: avoid_positional_boolean_parameters
 void showTaskForm(BuildContext context, [Task? task, bool? edit]) {

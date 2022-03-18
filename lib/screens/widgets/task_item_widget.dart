@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:task_list/data/controllers/task_controller.dart';
-import 'package:task_list/data/models/task_model.dart';
-import 'package:task_list/ui/themes.dart';
-import 'package:task_list/ui/widgets/action_bottom_sheet_widget.dart';
-import 'package:task_list/ui/widgets/round_button_widget.dart';
-import 'package:task_list/ui/widgets/snackbar_widget.dart';
-import 'package:task_list/ui/widgets/swipe_item_widget.dart';
-import 'package:task_list/ui/widgets/task_form_widget.dart';
+import 'package:task_list/controllers/task_controller.dart';
+import 'package:task_list/models/task_model.dart';
+import 'package:task_list/screens/widgets/action_bottom_sheet_widget.dart';
+import 'package:task_list/screens/widgets/round_button_widget.dart';
+import 'package:task_list/screens/widgets/snackbar_widget.dart';
+import 'package:task_list/screens/widgets/swipe_item_widget.dart';
+import 'package:task_list/screens/widgets/task_form_widget.dart';
 import 'package:task_list/utils/localizations.dart';
-
+import 'package:task_list/utils/themes.dart';
 
 // ignore: must_be_immutable
 class TaskItem extends StatefulWidget {

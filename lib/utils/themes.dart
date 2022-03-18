@@ -66,6 +66,7 @@ class Themes {
   // Light.
   static ThemeData lightTheme = ThemeData(
     primaryColor: _lightPrimaryColor,
+    scaffoldBackgroundColor: _lightBackgroundColor,
     colorScheme: const ColorScheme.light(
       secondary: _lightAccentColor,
     ),
@@ -95,6 +96,7 @@ class Themes {
   // Dark.
   static ThemeData darkTheme = ThemeData.dark().copyWith(
     primaryColor: _darkPrimaryColor,
+    scaffoldBackgroundColor: _darkBackgroundColor,
     colorScheme: const ColorScheme.dark(
       secondary: _darkAccentColor,
     ),

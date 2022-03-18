@@ -21,8 +21,8 @@ class TaskItem extends StatefulWidget {
     required this.isComplete,
   }) : super(key: key);
 
-  int id;
-  String name;
+  final int id;
+  final String name;
   bool isComplete;
 
   @override

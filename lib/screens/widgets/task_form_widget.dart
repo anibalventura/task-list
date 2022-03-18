@@ -9,7 +9,6 @@ import 'package:task_list/screens/widgets/round_button_widget.dart';
 import 'package:task_list/utils/localizations.dart';
 import 'package:task_list/utils/themes.dart';
 
-// ignore: avoid_positional_boolean_parameters
 void showTaskForm(BuildContext context, [Task? task, bool? edit]) {
   final formKey = GlobalKey<FormState>();
   final newTask = Task(id: 0, name: '', isComplete: false);
@@ -52,8 +51,7 @@ void showTaskForm(BuildContext context, [Task? task, bool? edit]) {
               labelText: task != null
                   ? translate(context, Texts.taskFormTitleEdit)
                   : translate(context, Texts.taskFormTitleAdd),
-              // ignore: noop_primitive_operations
-              onSaved: (value) => newTask.name = value.toString(),
+              onSaved: (value) => newTask.name = value,
               onFieldSubmitted: () => saveTask,
             ),
           ],

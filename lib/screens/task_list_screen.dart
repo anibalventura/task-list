@@ -21,8 +21,7 @@ class TaskListScreen extends StatelessWidget {
     final todoController = Provider.of<TaskController>(context, listen: false);
     final refreshController = RefreshController();
 
-    // ignore: avoid_void_async
-    void refresh() async {
+    Future<void> refresh() async {
       await todoController.getTasks();
       refreshController.refreshCompleted();
     }
